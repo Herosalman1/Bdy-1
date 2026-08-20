@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Birthday Diya - Dhamaka Edition</title>
+  <title>Happy Birthday - Dhamaka Edition</title>
   <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
   <style>
     * {
@@ -144,7 +144,6 @@
     :checked ~ label svg:nth-of-type(1) { display: block; }
     :checked ~ label svg:nth-of-type(2) { display: none; }
 
-    /* --- Added Creator Tag CSS --- */
     .creator-tag {
       position: fixed;
       bottom: 1rem;
@@ -164,13 +163,13 @@
 </head>
 <body>
 
-<!-- Added Creator Tag -->
 <a href="https://www.instagram.com/herosalman1_929/" target="_blank" class="creator-tag">
   Made by : @Herosalman1
 </a>
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
+    <!-- SVG Cake Code Omitted for brevity, paste your SVG here exactly as it was -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -262,7 +261,7 @@
     </svg>
     <div class="birthday-button__text" data-splitting="">
       <span class="greeting-text">Happy Birthday!</span>
-      <span class="name-text">Diya</span>
+      <span class="name-text">Friend</span> <!-- Updated default -->
     </div>
   </button>
 </div>
@@ -280,6 +279,16 @@
 
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
+    
+    // --- NAYA LOGIC YAHAN ADD KIYA HAI --- 
+    // Yeh URL se ?name=Salman nikalega aur animate hone se pehle HTML me update kar dega
+    const urlParams = new URLSearchParams(window.location.search);
+    const friendName = urlParams.get('name');
+    if (friendName) {
+      document.querySelector('.name-text').textContent = friendName;
+    }
+    // -------------------------------------
+
     Splitting();
 
     const BTN = document.querySelector('.birthday-button__button');
