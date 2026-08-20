@@ -258,6 +258,17 @@
 
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
+    
+    // ==========================================
+    // YAHAN HUMNE URL SE NAME CATCH KARNE KA LOGIC LAGA DIYA HAI
+    // ==========================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const userName = urlParams.get('name');
+    if (userName) {
+        document.querySelector('.name-text').innerText = userName;
+    }
+    // ==========================================
+
     Splitting();
 
     const BTN = document.querySelector('.birthday-button__button');
