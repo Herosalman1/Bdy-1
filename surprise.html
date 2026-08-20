@@ -143,9 +143,31 @@
     [type='checkbox'] { height: 0; width: 0; position: absolute; top: 0; left: 100%; }
     :checked ~ label svg:nth-of-type(1) { display: block; }
     :checked ~ label svg:nth-of-type(2) { display: none; }
+
+    /* --- Added Creator Tag CSS --- */
+    .creator-tag {
+      position: fixed;
+      bottom: 1rem;
+      left: 1rem;
+      color: lch(100% 0.01 296.81 / 0.7);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 10px;
+      text-decoration: none;
+      z-index: 1000;
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
+    .creator-tag:hover {
+      color: rgb(0, 0, 0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
+
+<!-- Added Creator Tag -->
+<a href="https://www.instagram.com/herosalman1_929/" target="_blank" class="creator-tag">
+  Made by : @Herosalman1
+</a>
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
@@ -258,17 +280,6 @@
 
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
-    
-    // ==========================================
-    // YAHAN HUMNE URL SE NAME CATCH KARNE KA LOGIC LAGA DIYA HAI
-    // ==========================================
-    const urlParams = new URLSearchParams(window.location.search);
-    const userName = urlParams.get('name');
-    if (userName) {
-        document.querySelector('.name-text').innerText = userName;
-    }
-    // ==========================================
-
     Splitting();
 
     const BTN = document.querySelector('.birthday-button__button');
