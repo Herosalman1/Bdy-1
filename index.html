@@ -146,7 +146,7 @@
       this.setSelectionRange(start, end); 
     });
 
-    // Alphabet to Number/ASCII Encoder (Bina pehle se save kiye direct encode karega)
+    // Alphabet to Number/ASCII Encoder (Jaise Salman -> 83-97-108-109-97-110)
     function encodeName(name) {
       let encodedArr = [];
       for (let i = 0; i < name.length; i++) {
@@ -178,7 +178,6 @@
       if(currentUrl.endsWith('index.HTML')) currentUrl = currentUrl.replace('index.HTML', '');
       if (!currentUrl.endsWith('/')) currentUrl += '/';
       
-      // URL mein sirf digit/ASCII key aayegi (Jaise ?key=83-97-108-109-97-110)
       const fullUrl = `${currentUrl}surprise.html?key=${encodedKey}`;
       
       document.getElementById('generatedUrl').value = fullUrl;
