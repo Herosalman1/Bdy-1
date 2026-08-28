@@ -169,6 +169,7 @@
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
+    <!-- SVG Cake Code Omitted for brevity, paste your SVG here exactly as it was -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -260,7 +261,7 @@
     </svg>
     <div class="birthday-button__text" data-splitting="">
       <span class="greeting-text">Happy Birthday!</span>
-      <span class="name-text">Friend</span>
+      <span class="name-text">Friend</span> <!-- Updated default -->
     </div>
   </button>
 </div>
@@ -279,10 +280,14 @@
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
     
-    // URL se ?key= parameter ko decode karke bina database ke direct naam nikalna
+    // --- UPDATED DECODER LOGIC ---
+    // Yeh URL se ?key= nikal kar decode karega, agar key na ho toh direct ?name= check karega (PC aur Mobile dono ke liye 100% working)
     const urlParams = new URLSearchParams(window.location.search);
     const encodedKey = urlParams.get('key');
+    const directName = urlParams.get('name');
     
+    let friendName = "";
+
     if (encodedKey) {
       try {
         let charCodes = encodedKey.split('-');
@@ -290,11 +295,20 @@
         for (let i = 0; i < charCodes.length; i++) {
           decodedName += String.fromCharCode(parseInt(charCodes[i]));
         }
-        document.querySelector('.name-text').textContent = decodedName;
+        friendName = decodedName;
       } catch (e) {
         console.error("Decoding error");
       }
     }
+
+    if (!friendName && directName) {
+      friendName = directName;
+    }
+
+    if (friendName) {
+      document.querySelector('.name-text').textContent = friendName;
+    }
+    // -----------------------------
 
     Splitting();
 
