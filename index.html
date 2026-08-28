@@ -56,7 +56,7 @@
       this.setSelectionRange(start, end); 
     });
 
-    // Name -> Digit/ASCII Key (e.g., Salman -> 83-97-108-109-97-110)
+    // Name -> Digit/ASCII Key via charCodeAt (Rule 2)
     function encodeName(name) {
       let encodedArr = [];
       for (let i = 0; i < name.length; i++) {
@@ -88,7 +88,6 @@
       if(currentUrl.endsWith('index.HTML')) currentUrl = currentUrl.replace('index.HTML', '');
       if (!currentUrl.endsWith('/')) currentUrl += '/';
       
-      // Clean digit key URL
       const fullUrl = `${currentUrl}surprise.html?key=${encodedKey}`;
       
       document.getElementById('generatedUrl').value = fullUrl;
