@@ -146,15 +146,6 @@
       this.setSelectionRange(start, end); 
     });
 
-    // Alphabet to Number/ASCII Encoder (Jaise Salman -> 83-97-108-109-97-110)
-    function encodeName(name) {
-      let encodedArr = [];
-      for (let i = 0; i < name.length; i++) {
-        encodedArr.push(name.charCodeAt(i));
-      }
-      return encodedArr.join('-');
-    }
-
     function generateLink() {
       const name = document.getElementById('friendName').value.trim();
       const genBtn = document.getElementById('genBtn');
@@ -171,14 +162,18 @@
         return;
       }
       
-      const encodedKey = encodeName(name);
+      // Rakhi Style Logic
+      const shortKey = 'bdy_' + Math.floor(Math.random() * 90000 + 10000);
+      const payload = { name: name };
+      localStorage.setItem(shortKey, JSON.stringify(payload));
       
       let currentUrl = window.location.href.split('?')[0].split('#')[0];
       if(currentUrl.endsWith('index.html')) currentUrl = currentUrl.replace('index.html', '');
       if(currentUrl.endsWith('index.HTML')) currentUrl = currentUrl.replace('index.HTML', '');
       if (!currentUrl.endsWith('/')) currentUrl += '/';
       
-      const fullUrl = `${currentUrl}surprise.html?key=${encodedKey}`;
+      // Clean and safe URL structure
+      const fullUrl = `${currentUrl}surprise.html?key=${shortKey}&name=${encodeURIComponent(name)}`;
       
       document.getElementById('generatedUrl').value = fullUrl;
       document.getElementById('resultBox').style.display = 'flex';
