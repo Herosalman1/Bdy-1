@@ -169,7 +169,6 @@
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
-    <!-- SVG Cake Code Exactly as provided by user -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -280,34 +279,31 @@
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
     
-    // --- NAYA LOGIC YAHAN ADD KIYA HAI (Safe Try-Catch ke sath) --- 
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const encodedKey = urlParams.get('key');
-      const directName = urlParams.get('name');
-      
-      let friendName = "";
+    // Name Decoder Logic
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedKey = urlParams.get('key');
+    const directName = urlParams.get('name');
 
-      if (encodedKey) {
+    let friendName = "";
+
+    if (encodedKey) {
         let charCodes = encodedKey.split('-');
         let decodedName = "";
         for (let i = 0; i < charCodes.length; i++) {
-          if (charCodes[i]) {
-            decodedName += String.fromCharCode(parseInt(charCodes[i]));
-          }
+            if (charCodes[i]) {
+                decodedName += String.fromCharCode(parseInt(charCodes[i]));
+            }
         }
-        friendName = decodedName;
-      } else if (directName) {
-        friendName = directName;
-      }
-
-      if (friendName) {
-        document.querySelector('.name-text').textContent = friendName;
-      }
-    } catch (error) {
-      console.error("Decoding error: ", error);
+        if (decodedName) friendName = decodedName;
     }
-    // -------------------------------------------------------------
+
+    if (!friendName && directName) {
+        friendName = directName;
+    }
+
+    if (friendName) {
+        document.querySelector('.name-text').textContent = friendName;
+    }
 
     Splitting();
 
