@@ -151,9 +151,10 @@
       const genBtn = document.getElementById('genBtn');
 
       if (!name) {
+        // Bina alert ke button ka text aur color error show karega
         const oldText = genBtn.innerText;
         genBtn.innerText = 'Enter Name First! ⚠️';
-        genBtn.style.background = '#ef4444'; 
+        genBtn.style.background = '#ef4444'; // Red color
         
         setTimeout(() => {
           genBtn.innerText = oldText;
@@ -162,17 +163,8 @@
         return;
       }
       
-      // Short key generate karke localStorage me name secure store karna (URL me naam nahi aayega)[cite: 14]
-      const shortKey = 'bday_' + Math.floor(Math.random() * 90000 + 10000);
-      localStorage.setItem(shortKey, name);
-      
-      const currentUrl = window.location.href.split('?')[0];
-      let baseUrl = currentUrl.replace('index.html', '');
-      if (!baseUrl.endsWith('/')) baseUrl += '/';
-      baseUrl += 'surprise.html';
-      
-      // URL mein sirf short key aayegi
-      const fullUrl = `${baseUrl}?key=${shortKey}`;
+      const baseUrl = 'https://herosalman1.github.io/CANDLE-CAKE/surprise.html';
+      const fullUrl = `${baseUrl}?name=${encodeURIComponent(name)}`;
       
       document.getElementById('generatedUrl').value = fullUrl;
       document.getElementById('resultBox').style.display = 'flex';
@@ -191,6 +183,7 @@
           copyBtn.style.background = '#3b82f6'; 
         }, 2000);
       }).catch(err => {
+        // Error aane par alert ki jagah button par dikhayega
         copyBtn.innerText = 'Failed! ❌';
         copyBtn.style.background = '#ef4444'; 
         
@@ -204,6 +197,7 @@
     function previewLink() {
       const url = document.getElementById('generatedUrl').value;
       if (url) {
+        // Bina kisi popup/naye tab ke direct usi page par link khol dega
         window.location.href = url;
       }
     }
