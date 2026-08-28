@@ -169,7 +169,6 @@
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
-    <!-- SVG Cake Code Omitted for brevity, paste your SVG here exactly as it was -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -210,7 +209,7 @@
           <rect class="cake__sprinkle" transform="rotate(45)" ry=".567" y="133.647" x="124.293" height="1.228" width="3.307"></rect>
         </g>
         <path id="frosting" d="M58.311 159.194c-1.915 0-3.283-.087-3.986 1.098-.392.661-.073 1.766.529 2.243 1.054.834 2.689 0 4.034 0H115.36c1.344 0 2.979.834 4.033 0 .602-.477.921-1.582.53-2.243-.703-1.185-2.072-1.098-3.987-1.098z"></path>
-        <path class="cake__frosting cake__frosting--end" d="M58.311 159.194c-1.915 0-3.354 2.034-3.986 3.744-.57 1.537-.953 4.189.529 4.888 1.454.687 2.425-2.645 4.034-2.645 1.608 0 2.425 2.645 4.033 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.436-2.83 4.034-2.645 1.936.222 2.084 4.233 4.033 4.233 1.95 0 2.098-4.01 4.034-4.233 1.598-.184 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.58 3.332 4.033 2.645 1.482-.7 1.098-3.35.53-4.888-.633-1.71-2.072-3.744-3.987-3.744z"></path>
+        <path class="cake__frosting cake__frosting--end" d="M58.311 159.194c-1.915 0-3.354 2.034-3.986 3.744-.57 1.537-.953 4.189.529 4.888 1.454.687 2.425-2.645 4.034-2.645 1.608 0 2.425 2.645 4.033 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034-2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.436-2.83 4.034-2.645 1.936.222 2.084 4.233 4.033 4.233 1.95 0 2.098-4.01 4.034-4.233 1.598-.184 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.58 3.332 4.033 2.645 1.482-.7 1.098-3.35.53-4.888-.633-1.71-2.072-3.744-3.987-3.744z"></path>
       </defs>
       <g class="cake-decoration" transform="translate(-48.82 -138.799)">
         <g class="cake__frosting-group" clip-path="url(#frosting-clip)">
@@ -261,7 +260,7 @@
     </svg>
     <div class="birthday-button__text" data-splitting="">
       <span class="greeting-text">Happy Birthday!</span>
-      <span class="name-text">Friend</span> <!-- Updated default -->
+      <span class="name-text">Friend</span>
     </div>
   </button>
 </div>
@@ -280,14 +279,12 @@
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
     
-    // --- NAYA LOGIC YAHAN ADD KIYA HAI --- 
-    // Yeh URL se ?name=Salman nikalega aur animate hone se pehle HTML me update kar dega
+    // URL se ?name= parameter pick karke card par set karega
     const urlParams = new URLSearchParams(window.location.search);
     const friendName = urlParams.get('name');
     if (friendName) {
       document.querySelector('.name-text').textContent = friendName;
     }
-    // -------------------------------------
 
     Splitting();
 
