@@ -32,11 +32,6 @@
       min-height: 100vh;
       background: hsl(180, 30%, calc(var(--lightness, 50) * 1%));
       transition: background 0.3s ease;
-      /* Text selection block karna taaki content copy na ho sake */
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
     body.party-mode {
       animation: neonPulse 0.8s infinite alternate;
@@ -174,6 +169,7 @@
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
+    <!-- SVG Cake Code Omitted for brevity, paste your SVG here exactly as it was -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -214,7 +210,7 @@
           <rect class="cake__sprinkle" transform="rotate(45)" ry=".567" y="133.647" x="124.293" height="1.228" width="3.307"></rect>
         </g>
         <path id="frosting" d="M58.311 159.194c-1.915 0-3.283-.087-3.986 1.098-.392.661-.073 1.766.529 2.243 1.054.834 2.689 0 4.034 0H115.36c1.344 0 2.979.834 4.033 0 .602-.477.921-1.582.53-2.243-.703-1.185-2.072-1.098-3.987-1.098z"></path>
-        <path class="cake__frosting cake__frosting--end" d="M58.311 159.194c-1.915 0-3.354 2.034-3.986 3.744-.57 1.537-.953 4.189.529 4.888 1.454.687 2.425-2.645 4.034-2.645 1.608 0 2.425 2.645 4.033 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034-2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034-2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034-2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034-2.645 1.608 0 2.436-2.83 4.034-2.645 1.936.222 2.084 4.233 4.033 4.233 1.95 0 2.098-4.01 4.034-4.233 1.598-.184 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.58 3.332 4.033 2.645 1.482-.7 1.098-3.35.53-4.888-.633-1.71-2.072-3.744-3.987-3.744z"></path>
+        <path class="cake__frosting cake__frosting--end" d="M58.311 159.194c-1.915 0-3.354 2.034-3.986 3.744-.57 1.537-.953 4.189.529 4.888 1.454.687 2.425-2.645 4.034-2.645 1.608 0 2.425 2.645 4.033 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.425-2.645 4.033-2.645 1.608 0 2.426 2.645 4.034 2.645 1.608 0 2.436-2.83 4.034-2.645 1.936.222 2.084 4.233 4.033 4.233 1.95 0 2.098-4.01 4.034-4.233 1.598-.184 2.426 2.645 4.034 2.645 1.608 0 2.426-2.645 4.034-2.645 1.608 0 2.58 3.332 4.033 2.645 1.482-.7 1.098-3.35.53-4.888-.633-1.71-2.072-3.744-3.987-3.744z"></path>
       </defs>
       <g class="cake-decoration" transform="translate(-48.82 -138.799)">
         <g class="cake__frosting-group" clip-path="url(#frosting-clip)">
@@ -265,7 +261,7 @@
     </svg>
     <div class="birthday-button__text" data-splitting="">
       <span class="greeting-text">Happy Birthday!</span>
-      <span class="name-text">Friend</span>
+      <span class="name-text">Friend</span> <!-- Updated default -->
     </div>
   </button>
 </div>
@@ -282,43 +278,16 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
-    // ----------------------------------------------------
-    // SECURITY & ANTI-INSPECT SCRIPTS (BLOCKS RIGHT CLICK & SHORTCUTS)
-    // ----------------------------------------------------
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || e.keyCode === 123) {
-            e.preventDefault();
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c' || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
-            e.preventDefault();
-            return false;
-        }
-        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
-            e.preventDefault();
-            return false;
-        }
-    });
-    // ----------------------------------------------------
-
-    // --- URL KEY & LOCALSTORAGE NAME FETCHING ---
+    const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
+    
+    // --- NAYA LOGIC YAHAN ADD KIYA HAI --- 
+    // Yeh URL se ?name=Salman nikalega aur animate hone se pehle HTML me update kar dega
     const urlParams = new URLSearchParams(window.location.search);
-    const shortKey = urlParams.get('key');
-    let friendName = 'Salman';
-
-    if (shortKey && localStorage.getItem(shortKey)) {
-        friendName = localStorage.getItem(shortKey);
-    }
-
+    const friendName = urlParams.get('name');
     if (friendName) {
       document.querySelector('.name-text').textContent = friendName;
     }
-
-    const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
+    // -------------------------------------
 
     Splitting();
 
