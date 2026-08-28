@@ -146,6 +146,15 @@
       this.setSelectionRange(start, end); 
     });
 
+    // Alphabet to ASCII Number Encoder
+    function encodeName(name) {
+      let encodedArr = [];
+      for (let i = 0; i < name.length; i++) {
+        encodedArr.push(name.charCodeAt(i));
+      }
+      return encodedArr.join('-');
+    }
+
     function generateLink() {
       const name = document.getElementById('friendName').value.trim();
       const genBtn = document.getElementById('genBtn');
@@ -162,8 +171,19 @@
         return;
       }
       
-      const baseUrl = 'https://herosalman1.github.io/CANDLE-CAKE/surprise.html';
-      const fullUrl = `${baseUrl}?name=${encodeURIComponent(name)}`;
+      const encodedKey = encodeName(name);
+      
+      // Dynamic URL creator jo current domain aur folder ke hisab se surprise.html target karega
+      let currentUrl = window.location.href.split('?')[0].split('#')[0];
+      if(currentUrl.endsWith('index.html')) {
+        currentUrl = currentUrl.replace('index.html', '');
+      } else if(currentUrl.endsWith('index.HTML')) {
+        currentUrl = currentUrl.replace('index.HTML', '');
+      }
+      if (!currentUrl.endsWith('/')) currentUrl += '/';
+      
+      // Yahan ensure kiya hai ki file ka naam exact 'surprise.html' match ho
+      const fullUrl = `${currentUrl}surprise.html?key=${encodedKey}`;
       
       document.getElementById('generatedUrl').value = fullUrl;
       document.getElementById('resultBox').style.display = 'flex';
