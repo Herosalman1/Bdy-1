@@ -280,35 +280,29 @@
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
     
-    // --- UPDATED DECODER LOGIC ---
-    // Yeh URL se ?key= nikal kar decode karega, agar key na ho toh direct ?name= check karega (PC aur Mobile dono ke liye 100% working)
+    // --- NAYA LOGIC YAHAN ADD KIYA HAI --- 
+    // Dual Fetch System: LocalStorage first, URL parameter backup (Rakhi style)
     const urlParams = new URLSearchParams(window.location.search);
-    const encodedKey = urlParams.get('key');
-    const directName = urlParams.get('name');
+    const shortKey = urlParams.get('key');
+    const urlName = urlParams.get('name');
     
     let friendName = "";
 
-    if (encodedKey) {
+    if (shortKey && localStorage.getItem(shortKey)) {
       try {
-        let charCodes = encodedKey.split('-');
-        let decodedName = "";
-        for (let i = 0; i < charCodes.length; i++) {
-          decodedName += String.fromCharCode(parseInt(charCodes[i]));
-        }
-        friendName = decodedName;
-      } catch (e) {
-        console.error("Decoding error");
-      }
+        const savedData = JSON.parse(localStorage.getItem(shortKey));
+        friendName = savedData.name;
+      } catch(e) { console.error("Storage data parse error"); }
     }
 
-    if (!friendName && directName) {
-      friendName = directName;
+    if (!friendName && urlName) {
+      friendName = urlName;
     }
 
     if (friendName) {
       document.querySelector('.name-text').textContent = friendName;
     }
-    // -----------------------------
+    // -------------------------------------
 
     Splitting();
 
