@@ -169,7 +169,6 @@
 
 <div class="birthday-button" id="card">
   <button class="birthday-button__button">
-    <!-- SVG Cake Code Omitted for brevity, paste your SVG here exactly as it was -->
     <svg class="birthday-button__cake" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76.609 47.643">
       <defs>
         <g id="candle" transform="translate(-48.82 -137.74)">
@@ -261,7 +260,7 @@
     </svg>
     <div class="birthday-button__text" data-splitting="">
       <span class="greeting-text">Happy Birthday!</span>
-      <span class="name-text">Friend</span> <!-- Updated default -->
+      <span class="name-text">Friend</span>
     </div>
   </button>
 </div>
@@ -280,7 +279,6 @@
   <script>
     const { gsap, gsap: { to, timeline, set, delayedCall }, Splitting } = window;
     
-    // --- DIGIT TO NAME DECODER LOGIC --- 
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const encodedKey = urlParams.get('key');
@@ -306,7 +304,6 @@
     } catch (error) {
       console.error("Decoding error: ", error);
     }
-    // -----------------------------------
 
     Splitting();
 
@@ -340,14 +337,22 @@
         const timeLeft = animationEnd - Date.now();
         if (timeLeft <= 0) return clearInterval(interval);
 
+        // Left Confetti Cannon
         confetti({
-          particleCount: 45,
-          startVelocity: 35,
-          spread: 360,
-          ticks: 60,
-          origin: { x: Math.random(), y: Math.random() - 0.2 }
+          particleCount: 30,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0, y: 0.6 }
         });
-      }, 200);
+        
+        // Right Confetti Cannon
+        confetti({
+          particleCount: 30,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1, y: 0.6 }
+        });
+      }, 250);
     };
 
     const EYES = document.querySelector('.cake__eyes');
